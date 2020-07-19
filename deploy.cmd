@@ -63,10 +63,8 @@ IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
   IF !ERRORLEVEL! NEQ 0 goto error
 )
 
-mkdir %ARTIFACTS%\wwwroot\wakawaka
-mkdir d:\home\site\wwwroot\wakawaka1
-mkdir wakawaka2
-mkdir %DEPLOYMENT_TARGET%\wakawaka3
+mkdir %DEPLOYMENT_TARGET%\wakawaka
+rmdir /s %DEPLOYMENT_TARGET%\wakawaka
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 goto end
