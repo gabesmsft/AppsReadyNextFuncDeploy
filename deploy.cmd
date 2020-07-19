@@ -38,9 +38,6 @@ IF NOT DEFINED NEXT_MANIFEST_PATH (
   )
 )
 
-mkdir wakawaka
-rmdir /s wakawaka
-
 IF NOT DEFINED KUDU_SYNC_CMD (
   :: Install kudu sync
   echo Installing Kudu Sync
@@ -65,6 +62,9 @@ IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
   call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_TEMP%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
   IF !ERRORLEVEL! NEQ 0 goto error
 )
+
+mkdir wakawaka
+rmdir /s wakawaka
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 goto end
