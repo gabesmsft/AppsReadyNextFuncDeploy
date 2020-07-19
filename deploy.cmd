@@ -64,7 +64,6 @@ IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
 )
 
 mkdir %DEPLOYMENT_TARGET%\wakawaka
-rmdir /s %DEPLOYMENT_TARGET%\wakawaka
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 goto end
