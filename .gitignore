@@ -263,5 +263,5 @@ paket-files/
 __pycache__/
 *.pyc
 
-*/Properties/
+*/Properties/PublishProfiles
 .vs
