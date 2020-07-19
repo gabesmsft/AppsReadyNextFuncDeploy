@@ -38,7 +38,7 @@ IF NOT DEFINED NEXT_MANIFEST_PATH (
   )
 )
 
-del %ARTIFACTS%\wwwroot\wakawaka.txt
+del wakawaka.txt
 
 IF NOT DEFINED KUDU_SYNC_CMD (
   :: Install kudu sync
