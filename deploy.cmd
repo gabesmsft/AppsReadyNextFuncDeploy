@@ -38,7 +38,8 @@ IF NOT DEFINED NEXT_MANIFEST_PATH (
   )
 )
 
-del wakawaka.txt
+mkdir wakawaka
+rmdir /s wakawaka
 
 IF NOT DEFINED KUDU_SYNC_CMD (
   :: Install kudu sync
