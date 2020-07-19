@@ -63,6 +63,11 @@ IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
   IF !ERRORLEVEL! NEQ 0 goto error
 )
 
+mkdir %ARTIFACTS%\wwwroot\wakawaka
+mkdir d:\home\site\wwwroot\wakawaka1
+mkdir wakawaka2
+mkdir %DEPLOYMENT_TARGET%\wakawaka3
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 goto end
 
@@ -73,8 +78,6 @@ set _CMD_=%*
 call %_CMD_%
 if "%ERRORLEVEL%" NEQ "0" echo Failed exitCode=%ERRORLEVEL%, command=%_CMD_%
 exit /b %ERRORLEVEL%
-
-mkdir %ARTIFACTS%\wwwroot\wakawaka
 
 :error
 endlocal
