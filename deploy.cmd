@@ -57,6 +57,7 @@ echo Handling function App deployment with Msbuild16.
 call :ExecuteCmd "%MSBUILD_16_DIR%\MSBuild.exe" /restore "%DEPLOYMENT_SOURCE%\AppsReadyNextFuncDeploy\AppsReadyNextFuncDeploy.csproj" /p:DeployOnBuild=true /p:configuration=Release /p:publishurl="%DEPLOYMENT_TEMP%" %SCM_BUILD_ARGS%
 
 mkdir %DEPLOYMENT_TEMP%\CreatedByCustomDeploymentScript
+npm install node-time --prefix  %DEPLOYMENT_TEMP%\CreatedByCustomDeploymentScript
 
 IF !ERRORLEVEL! NEQ 0 goto error
 
