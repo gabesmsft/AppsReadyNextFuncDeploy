@@ -59,12 +59,15 @@ IF !ERRORLEVEL! NEQ 0 goto error
 
 :: 2. Custom deployment script actions
 mkdir %DEPLOYMENT_TEMP%\CreatedByCustomDeploymentScript
+IF !ERRORLEVEL! NEQ 0 goto error
+
+:: 3. Custom deployment script actions2
 npm install node-time --prefix  %DEPLOYMENT_TEMP%\CreatedByCustomDeploymentScript
 IF !ERRORLEVEL! NEQ 0 goto error
 
 mkdir %DEPLOYMENT_TARGET%\CreatedByCustomDeploymentScript1
 
-:: 3. KuduSync
+:: 4. KuduSync
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
   call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_TEMP%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
   IF !ERRORLEVEL! NEQ 0 goto error
