@@ -57,8 +57,8 @@ echo Handling function App deployment with Msbuild16.
 call :ExecuteCmd "%MSBUILD_16_DIR%\MSBuild.exe" /restore "%DEPLOYMENT_SOURCE%\AppsReadyNextFuncDeploy\AppsReadyNextFuncDeploy.csproj" /p:DeployOnBuild=true /p:configuration=Release /p:publishurl="%DEPLOYMENT_TEMP%" %SCM_BUILD_ARGS%
 IF !ERRORLEVEL! NEQ 0 goto error
 
-echo My Fake Custom Deployment script in action - doing an npm install of node-time
-npm install node-time
+mkdir CreatedByCustomDeploymentScript
+
 
 :: 2. KuduSync
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
