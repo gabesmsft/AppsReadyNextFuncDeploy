@@ -63,8 +63,8 @@ IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
   IF !ERRORLEVEL! NEQ 0 goto error
 )
 
-echo My Fake Custom Deployment script in action - doing an npm install
-npm install fake-package
+echo My Fake Custom Deployment script in action - doing an npm install of node-time
+npm install node-time
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 goto end
