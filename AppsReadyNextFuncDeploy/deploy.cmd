@@ -46,15 +46,25 @@ IF NOT DEFINED KUDU_SYNC_CMD (
 
   :: Locally just running "kuduSync" would also work
   SET KUDU_SYNC_CMD=%appdata%\npm\kuduSync.cmd
-  
 )
-
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: Deployment
 :: ----------
 
-mkdir %DEPLOYMENT_TARGET%\wakawaka
-rmdir /s %DEPLOYMENT_TARGET%\wakawaka
+echo Handling function App deployment with Msbuild16.
+
+:: 1. Restore, Build and publish
+call :ExecuteCmd "%MSBUILD_16_DIR%\MSBuild.exe" /restore "%DEPLOYMENT_SOURCE%\AppsReadyNextFuncDeploy\AppsReadyNextFuncDeploy.csproj" /p:DeployOnBuild=true /p:configuration=Release /p:publishurl="%DEPLOYMENT_TEMP%" %SCM_BUILD_ARGS%
+IF !ERRORLEVEL! NEQ 0 goto error
+
+:: 2. KuduSync
+IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
+  call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_TEMP%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
+  IF !ERRORLEVEL! NEQ 0 goto error
+)
+
+echo My Fake Custom Deployment script in action - doing an npm install
+npm install fake-package
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 goto end
