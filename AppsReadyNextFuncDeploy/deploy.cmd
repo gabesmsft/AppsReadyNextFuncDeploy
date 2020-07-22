@@ -50,7 +50,7 @@ IF NOT DEFINED KUDU_SYNC_CMD (
 )
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: Deployment
+:: Deployment - the rmdir /s below will cause a SCM command timeout since it is prompting for user input
 :: ----------
 
 mkdir %DEPLOYMENT_TARGET%\wakawaka
