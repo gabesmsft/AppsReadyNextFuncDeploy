@@ -58,14 +58,12 @@ call :ExecuteCmd "%MSBUILD_16_DIR%\MSBuild.exe" /restore "%DEPLOYMENT_SOURCE%\Ap
 IF !ERRORLEVEL! NEQ 0 goto error
 
 :: 2. Custom deployment script actions
-mkdir %DEPLOYMENT_TEMP%\CreatedByCustomDeploymentScript
+mkdir %DEPLOYMENT_TARGET%\CreatedByCustomDeploymentScript
 IF !ERRORLEVEL! NEQ 0 goto error
 
 :: 3. Custom deployment script actions2
-npm install node-time --prefix  %DEPLOYMENT_TEMP%\CreatedByCustomDeploymentScript
+npm install node-time --prefix  %DEPLOYMENT_TARGET%\CreatedByCustomDeploymentScript
 IF !ERRORLEVEL! NEQ 0 goto error
-
-mkdir %DEPLOYMENT_TARGET%\CreatedByCustomDeploymentScript1
 
 :: 4. KuduSync
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
