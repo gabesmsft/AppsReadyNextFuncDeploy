@@ -57,16 +57,16 @@ echo Handling function App deployment with Msbuild16.
 call :ExecuteCmd "%MSBUILD_16_DIR%\MSBuild.exe" /restore "%DEPLOYMENT_SOURCE%\AppsReadyNextFuncDeploy\AppsReadyNextFuncDeploy.csproj" /p:DeployOnBuild=true /p:configuration=Release /p:publishurl="%DEPLOYMENT_TEMP%" %SCM_BUILD_ARGS%
 IF !ERRORLEVEL! NEQ 0 goto error
 
-:: 2. Custom deployment script actions
-mkdir %DEPLOYMENT_TARGET%\CreatedByCustomDeploymentScript
-npm install node-time --prefix  %DEPLOYMENT_TARGET%\CreatedByCustomDeploymentScript
-IF !ERRORLEVEL! NEQ 0 goto error
-
-:: 3. KuduSync
+:: 2. KuduSync
 IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
   call :ExecuteCmd "%KUDU_SYNC_CMD%" -v 50 -f "%DEPLOYMENT_TEMP%" -t "%DEPLOYMENT_TARGET%" -n "%NEXT_MANIFEST_PATH%" -p "%PREVIOUS_MANIFEST_PATH%" -i ".git;.hg;.deployment;deploy.cmd"
   IF !ERRORLEVEL! NEQ 0 goto error
 )
+
+:: 3. Custom deployment script actions
+mkdir %DEPLOYMENT_TARGET%\CreatedByCustomDeploymentScript
+npm install node-time --prefix  %DEPLOYMENT_TARGET%\CreatedByCustomDeploymentScript
+IF !ERRORLEVEL! NEQ 0 goto error
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 goto end
